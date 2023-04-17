@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Resources</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+    <script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="p-3">
+        <div class="card">
+            <div class="card-header">List of resources</div>
+            <div class="card-body">
+                <form method="get" th:href="@{/index}">
+                    <ul class="nav nav-pills">
+                        <li>
+                            <label class="form-label"></label>
+                        </li>
+                        <li>
+                            <input type="text" class="form-control" name="keyword" placeholder="Keyword">
+                        </li>
+                        <li style="margin-left: 1rem;">
+                            <button class="btn btn-info">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th> <th>Title</th> <th>Price</th> <th>Purchase Date</th> <th>Note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="resource : ${resources}">
+                        <td th:text="${resource.id}"></td>
+                        <td th:text="${resource.title}"></td>
+                        <td th:text="${resource.price}"></td>
+                        <td th:text="${resource.purchaseDate}"></td>
+                        <td th:text="${resource.note}"></td>
+                        <td>
+                            <a  class="btn btn-danger"
+                                th:href="@{editResource(id=${resource.id})}">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                        </td>
+                        <td>
+
+                            <a onclick="return confirm('Are you sure you want to delete this patient')" class="btn btn-danger"
+                               th:href="@{deleteResource(id=${resource.id}, keyword=${keyword}, page=${currentPage})}">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <ul class = "nav nav-pills">
+                    <li th:each="page, status:${pages}">
+                        <a th:class="${status.index == currentPage?'btn btn-primary ms-1':'btn btn-outline-primary ms-1'}"
+                           th:text="${status.index+1}"
+                           th:href="@{index(page=${status.index},keyword=${keyword})}"></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

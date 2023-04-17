@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Resource</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
+    <script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="p-3">
+        <form method="post" th:action="@{saveResource}">
+            <div class="mb-3 mt-3">
+                <label for="id" class="form-label">ID:</label>
+                <label th:text="${resource.id}"></label>
+                <input type="hidden" class="form-control" id="id" placeholder="Id" name="id" th:value="${resource.id}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="title" placeholder="Title" name="title" th:value="${resource.title}">
+                <span class="text-danger" th:errors="${resource.title}"></span>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="text" class="form-control" id="price" placeholder="Price"
+                       name="price" th:value="${resource.price}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="purchaseDate" class="form-label">Purchase Date:</label>
+                <input type="date" class="form-control" id="purchaseDate" placeholder="Purchase Date"
+                       name="purchaseDate" th:value="${resource.purchaseDate}">
+                <span class="text-danger" th:errors="${resource.purchaseDate}"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <label for="note" class="form-label">Note:</label>
+                <input type="text" class="form-control" id="note" placeholder="Note"
+                       name="note" th:value="${resource.note}">
+                <span class="text-danger" th:errors="${resource.note}"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
